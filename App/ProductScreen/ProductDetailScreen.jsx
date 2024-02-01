@@ -1,5 +1,6 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import Colors from '../Utils/Colors'
 
 const ProductDetailScreen = ({ route, navigation }) => {
 
@@ -10,6 +11,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
     const { storeName } = route.params
     const { address } = route.params
     const { phone } = route.params
+    const { priceId } = route.params
 
   return (
     <View style={styles.container}>
@@ -32,6 +34,19 @@ const ProductDetailScreen = ({ route, navigation }) => {
                 <Text>{phone}</Text>
             </View>
         </View>
+        <View style= {{justifyContent: "center", alignItems:"center"}}>
+            <TouchableOpacity style={styles.button} onPress={() => {
+                navigation.navigate('Order', {
+                    name: name,
+                    price: price,
+                    priceId: priceId,
+                    stock: stock,
+                    storeName: storeName,
+                })
+            }}>
+                <Text style={{fontSize: 24, color: Colors.WHITE}}>Order Item</Text>
+            </TouchableOpacity>
+        </View>
     </View>
   )
 }
@@ -43,5 +58,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
+    },
+    button: {
+        backgroundColor: Colors.BLACK,
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        borderRadius: 10,
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+        marginBottom: 30,
     },
 })

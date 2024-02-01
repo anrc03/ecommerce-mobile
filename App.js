@@ -12,6 +12,7 @@ import ProductScreen from './App/ProductScreen/ProductScreen';
 import ProductDetailScreen from './App/ProductScreen/ProductDetailScreen';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import OrderScreen from './App/OrderScreen/OrderScreen';
 // import * as SecureStore from "expo-web-browser";
 
 const Stack = createNativeStackNavigator();
@@ -21,8 +22,9 @@ export default function App() {
   // const [token, setToken] = useState("")
   // useEffect(() => {
   //   AsyncStorage.getItem("token")
-  //     .then(res => setToken(token))
-  // },[token])
+  //     .then(res => setToken(res))
+  //     console.log(token)
+  // },[])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,10 +37,11 @@ export default function App() {
           <Stack.Screen name = "Profile" component={ProfileScreen} />
           <Stack.Screen name = "Products" component={ProductScreen} />
           <Stack.Screen name = "Product Details" component={ProductDetailScreen} />
+          <Stack.Screen name = "Order" component={OrderScreen} />
           {/* {token? (
             <>
-              <Stack.Screen name = "Home" component={HomeScreen} />
               <Stack.Screen name = "Tab" component={TabNavigation} />
+              <Stack.Screen name = "Home" component={HomeScreen} />
               <Stack.Screen name = "Profile" component={ProfileScreen} />
               <Stack.Screen name = "Products" component={ProductScreen} />
               <Stack.Screen name = "Product Details" component={ProductDetailScreen} />

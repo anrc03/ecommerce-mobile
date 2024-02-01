@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 // import axios from '../Utils/AxiosInterceptor'
 import { IP_URL } from '../Constant/Url'
 import axios from 'axios'
-import Colors from '../Utils/Colors'
 import Header from '../Header/Header'
 
 const ProductScreen = ({navigation}) => {
@@ -35,6 +34,7 @@ const ProductScreen = ({navigation}) => {
         renderItem={({ item, index }) => (
             <TouchableOpacity style={{margin:10, borderWidth: 1, borderRadius: 5}} onPress={() => {
                 navigation.navigate('Product Details', {
+                    priceId: item.productPriceId,
                     name: item.productName,
                     description: item.description,
                     price: item.price,

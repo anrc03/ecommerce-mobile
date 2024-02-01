@@ -16,11 +16,7 @@ const LoginScreen = ({navigation}) => {
     const [token, setToken] = useState("")
 
     useEffect(() => {
-        if (token) {
-            navigation.navigate("Tab")
-        } else {
-            navigation.navigate("Login")
-        }
+        if (token) navigation.navigate("Tab")
     }, [token])
 
     const toggleShowPassword = () => { 
@@ -42,6 +38,7 @@ const LoginScreen = ({navigation}) => {
                   console.log(res.data.data.token)
                   await AsyncStorage.setItem("role", res.data.data.role);
                   await AsyncStorage.setItem("username", username);
+                  await AsyncStorage.setItem("userId", res.data.data.userDetails.id);
                   console.log("success storing data")
                 } catch (e) {
                   console.log(e)

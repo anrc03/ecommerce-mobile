@@ -34,7 +34,7 @@ const ProfileScreen = ({navigation}) => {
         <View style={{justifyContent: 'center', alignItems:'center'}}>
             <Image source={require('/home/user/OFFLINE/BATCH14/MOBILE/Shopemart/assets/images/pp.webp')} style={styles.pp} />
         </View>
-      <Text style={{fontWeight: "bold"}}>{username}</Text>
+      <Text style={{fontWeight: "bold", fontSize: 24}}>{username}</Text>
       <Text>{role}</Text>
       <View>
         <TouchableOpacity style={styles.button} onPress={handleLogout}>
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     pp: {
-        height: 70,
-        width: 70,
-        borderRadius: 50
+        height: 150,
+        width: 150,
+        borderRadius: 100
     },
     button: {
         backgroundColor: Colors.BLACK,

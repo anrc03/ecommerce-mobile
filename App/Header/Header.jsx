@@ -21,7 +21,7 @@ function Header() {
             />
             <View>
                 <Text style={{color:Colors.WHITE, fontSize: 15}}>Welcome</Text>
-                <Text style={{color:Colors.WHITE, fontWeight:'bold', fontSize: 24}}>{username}</Text>
+                <Text style={{color:Colors.WHITE, fontWeight:'bold', fontSize: 24}}>{username}!</Text>
             </View>
         </View>
 

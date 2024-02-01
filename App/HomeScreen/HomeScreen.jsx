@@ -7,22 +7,22 @@ export default function HomeScreen({navigation}) {
     <ScrollView>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <Header />
-        <View style={styles.imageContainer}>
+        <TouchableOpacity style={styles.imageContainer}>
           <Text style={styles.bannerText}>THIS WEEKEND ONLY</Text>
           <Image source={require('/home/user/OFFLINE/BATCH14/MOBILE/Shopemart/assets/images/banner2.jpg')} style={styles.image}/>
-        </View>
-        <View style={styles.imageContainer}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.imageContainer}>
           <Text style={styles.bannerText}>LIMITED STOCK</Text>
           <Image source={require('/home/user/OFFLINE/BATCH14/MOBILE/Shopemart/assets/images/banner3.webp')} style={styles.image}/>
-        </View>
-        <View style={styles.imageContainer}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.imageContainer}>
           <Text style={styles.bannerText}>SPECIAL SALE</Text>
           <Image source={require('/home/user/OFFLINE/BATCH14/MOBILE/Shopemart/assets/images/banner4.webp')} style={styles.image}/>
-        </View>
-        <View style={styles.imageContainer}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.imageContainer}>
           <Text style={styles.bannerText}>STAY TUNED!</Text>
           <Image source={require('/home/user/OFFLINE/BATCH14/MOBILE/Shopemart/assets/images/banner5.jpg')} style={styles.image}/>
-        </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   )
