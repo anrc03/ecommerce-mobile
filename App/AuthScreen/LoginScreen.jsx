@@ -1,5 +1,5 @@
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../Utils/Colors';
@@ -13,6 +13,15 @@ const LoginScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const [showPassword, setShowPassword] = useState(false); 
+    const [token, setToken] = useState("")
+
+    useEffect(() => {
+        if (token) {
+            navigation.navigate("Tab")
+        } else {
+            navigation.navigate("Login")
+        }
+    }, [token])
 
     const toggleShowPassword = () => { 
         setShowPassword(!showPassword); 
@@ -29,6 +38,8 @@ const LoginScreen = ({navigation}) => {
             const storeData = async () => {
                 try {
                   await AsyncStorage.setItem("token", res.data.data.token);
+                  setToken(res.data.data.token)
+                  console.log(res.data.data.token)
                   await AsyncStorage.setItem("role", res.data.data.role);
                   await AsyncStorage.setItem("username", username);
                   console.log("success storing data")
@@ -38,7 +49,7 @@ const LoginScreen = ({navigation}) => {
             };
             axios.defaults.headers.common = {Authorization: `Bearer ${res.data.data.token}`}
             storeData()
-            Alert.alert("Login Success", "OK", [{ text: 'Get Started', onPress: () => navigation.navigate('Tab') }], { cancelable: false }) 
+            Alert.alert("Login Success", "OK", [{ text: 'Get Started' }], { cancelable: false }) 
         })
         .catch((err) => {
             console.error(err)

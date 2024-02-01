@@ -10,8 +10,7 @@ function Header() {
 
     useEffect(() => {
         AsyncStorage.getItem("username").then(res => setUsername(res))
-        /AsyncStorage.getItem("role").then(res => setRole(res))
-    }, [])
+    }, [username])
 
   return (
     <View style={styles.container}>

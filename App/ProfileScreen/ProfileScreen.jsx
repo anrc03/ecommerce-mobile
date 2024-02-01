@@ -7,16 +7,26 @@ const ProfileScreen = ({navigation}) => {
 
     const [username, setUsername] = useState("")
     const [role, setRole] = useState("")
+    const [token, setToken] = useState("")
 
     useEffect(() => {
         AsyncStorage.getItem("username").then(res => setUsername(res))
-        /AsyncStorage.getItem("role").then(res => setRole(res))
-    }, [])
+        AsyncStorage.getItem("role").then(res => setRole(res))
+    }, [username])
 
-    const handleLogout = () => { 
+    useEffect(() => {
+        AsyncStorage.getItem("token").then((res) => {
+            setToken(res)
+            // console.log(res)
+            if(!res) navigation.navigate("Login")
+        })
+    }, [token])
+
+    const handleLogout = async () => { 
         let keys = ["username", "role", "token"]
-        AsyncStorage.multiRemove(keys)
-        navigation.navigate("Login")
+        await AsyncStorage.multiRemove(keys)
+        await AsyncStorage.clear()
+        setToken("")
     }
 
   return (
