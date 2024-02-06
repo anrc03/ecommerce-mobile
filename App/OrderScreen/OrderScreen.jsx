@@ -12,6 +12,7 @@ const OrderScreen = ({ route, navigation }) => {
 
     const [customerList, setCustomerList] = useState([])
     const [userId, setUserId] = useState("")
+    const [customerId, setCustomerId] = useState("")
 
     useEffect(() => {
         AsyncStorage.getItem("userId").then(res => setUserId(res))
@@ -23,15 +24,14 @@ const OrderScreen = ({ route, navigation }) => {
     const { stock } = route.params
     const { storeName } = route.params
 
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
 
     increaseCount = () => {
-        if (quantity <= stock)
-        setQuantity(quantity+1)
+        if (quantity <= stock) setQuantity(quantity+1)
     }
 
     decreaseCount = () => {
-        setQuantity(quantity-1)
+        if (quantity != 1) setQuantity(quantity-1)
     }
 
     useEffect(() => {
@@ -45,12 +45,20 @@ const OrderScreen = ({ route, navigation }) => {
     const customers = customerList.filter(customer => customer.userCredential)
     const filteredCustomers = customers.filter(customer => customer.userCredential.id === userId)
     console.log(filteredCustomers)
-    const currentCustomerId = filteredCustomers[0]["id"]
-    console.log(currentCustomerId)
+
+    useEffect(() => {
+        console.log("fc= ", filteredCustomers)
+        if (filteredCustomers.length)  {
+            const currentCustomerId = filteredCustomers[0]["id"];
+            setCustomerId(currentCustomerId)
+    }
+    }, [customerList])
+
+    console.log(customerId)
 
     const handleOrder = () => {
         axios.post(orderUrl, {
-            "customerId" : currentCustomerId,
+            "customerId" : customerId,
             "orderDetails" : [
                 {
                     "productPriceId" : priceId,
@@ -91,7 +99,7 @@ const OrderScreen = ({ route, navigation }) => {
                     <Text style={{borderWidth: 2, textAlign:"center", fontWeight:"bold", margin:5, justifyContent:'center', alignItems:'center' , fontSize:23}}>+</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{flexDirection:'row', margin:50}}>
+            <View style={{flexDirection:'row', margin:40}}>
                 <Text style={{fontWeight:"bold", fontSize: 21, textAlign:"center"}}>Total: </Text>
                 <Text style={{fontWeight:"bold", fontSize: 21, textAlign:"center"}}>Rp. {price * quantity}</Text>
             </View>
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 30,
+        marginTop: 0,
+        marginBottom: 10,
     },
 })
